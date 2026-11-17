@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4주 개인운동 프로그램</title>
+<style>
+:root{--ink:#1d2330;--sub:#5b6475;--line:#e3e6ec;--bg:#f6f7f9;--card:#fff;--accent:#2f6b5e;--accent2:#e8f1ee;--warn:#b5562a;--b:#3d5a8a;--b2:#e9eef7}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:var(--accent);color:#fff;padding:36px 20px 28px}
+header h1{margin:0 0 6px;font-size:26px}
+header p{margin:0;opacity:.9;font-size:14px}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+header .wrap{padding:0}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:5}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 16px}
+nav a{white-space:nowrap;padding:8px 12px;border-radius:8px;color:var(--sub);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--accent2);color:var(--accent)}
+section{margin:32px 0}
+h2{font-size:20px;border-left:4px solid var(--accent);padding-left:10px;margin:0 0 14px}
+h3{font-size:16px;margin:0 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:9px 8px;text-align:left;vertical-align:middle}
+/* 전체 스케줄 */
+.sched{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.sched th{background:#fafbfc;color:var(--sub);font-weight:600;border-bottom:1px solid var(--line);text-align:center}
+.sched td{border-bottom:1px solid var(--line);text-align:center}
+.sched tr:last-child td{border-bottom:0}
+.sched td.day{text-align:left;white-space:nowrap;font-weight:700}
+.sched td.day small{display:block;font-weight:400;color:var(--sub);font-size:12px}
+.sched .A{background:var(--accent2)}
+.sched .B{background:var(--b2)}
+.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:0 6px;margin-left:4px;color:#fff;vertical-align:1px}
+.badge.A{background:var(--accent)}.badge.B{background:var(--b)}
+.legend{font-size:13px;color:var(--sub);margin-top:8px}
+/* 주차별 */
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:#fff;padding:8px 16px;border-radius:999px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.weekgoal{background:var(--accent2);border-radius:10px;padding:10px 14px;font-size:14px;margin-bottom:14px}
+.prog td,.prog th{border-bottom:1px solid var(--line)}
+.prog th{background:#fafbfc;color:var(--sub);font-weight:600}
+.prog tr.grp td{background:#f7f8fa;font-size:12px;font-weight:700;color:var(--sub);padding:5px 8px;letter-spacing:.02em}
+.prog tr.main td{background:#fff8ef}
+.ord{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.ord span{background:var(--accent2);color:var(--accent);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600}
+.ord i{color:var(--sub);font-style:normal}
+.prog tr.main td:nth-child(2){font-weight:700}
+.prog td:first-child{width:42px;color:var(--sub)}
+.prog td:nth-child(3),.prog td:nth-child(4){white-space:nowrap}
+/* 자세 */
+.guide{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:22px}
+.guide .card{margin:0}
+.guide b{display:block;margin-bottom:4px}
+.guide .en{color:var(--sub);font-size:12px;font-weight:400}
+.guide .warn{color:var(--warn);font-size:13px;margin-top:6px}
+.parthead{font-size:16px;margin:0 0 10px;color:var(--accent)}
+/* 발전 */
+.ladder{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.ladder div{border-radius:8px;padding:8px 12px;font-size:14px;color:#fff}
+ul{padding-left:20px;margin:6px 0}
+.note{font-size:13px;color:var(--sub)}
+.mains td,.mains th{border-bottom:1px solid var(--line);vertical-align:top}
+.mains th{background:#fafbfc;color:var(--sub)}
+.stop{border-color:#f0c9b6;background:#fff8f4}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:30px 0 50px}
+@media print{nav,.tabs{display:none}.weekpanel{display:block!important;page-break-after:always}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>4주 개인운동 프로그램</h1>
+<p>PT 수업 외 개인운동용 · 주 5일(월~금) · 1회 40~60분</p>
+</div></header>
+
+<nav><div class="wrap">
+<a href="#schedule">① 전체 스케줄</a>
+<a href="#detail">② 주차별 프로그램</a>
+<a href="#guide">③ 운동별 자세</a>
+<a href="#progress">④ 발전 방향</a>
+<a href="#notice">⑤ 주의사항</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="schedule">
+<h2>① 4주 전체 운동 스케줄</h2>
+<div class="sched" style="overflow-x:auto"><table id="schedTable"></table></div>
+<p class="legend">표에는 요일별 메인 운동만 적었어요. <span class="badge A">A</span> 1·3주차 루틴 · <span class="badge B">B</span> 2·4주차 루틴<br>하체는 수요일(무릎 중심)과 금요일(엉덩이·힙힌지 중심)로 나눴어요. 1·3주차는 화요일 루마니안 데드리프트 다음 날 스쿼트가 있으니, 허벅지 뒤쪽 피로가 크면 수요일 무게를 낮춰요.</p>
+</section>
+
+<section id="detail">
+<h2>② 주차별 운동 프로그램</h2>
+<div class="tabs" id="weekTabs"></div>
+<div id="weekPanels"></div>
+</section>
+
+<section id="guide">
+<h2>③ 운동별 자세 설명</h2>
+<p class="note" style="margin-top:0">관절 각도와 가동범위는 사람마다 다름. 아래 설명은 기준이며, 통증 없이 조절할 수 있는 범위 안에서 움직이는 것이 가장 중요함.</p>
+<div id="guideWrap"></div>
+</section>
+
+<section id="progress">
+<h2>④ 주차별 발전 방향</h2>
+<div class="card">
+<h3>1. 운동 순서</h3>
+<p style="margin:0">기술적으로 어렵고 큰 힘이 필요한 다관절 운동을 먼저 하고, 그다음에 단관절 보조 운동과 코어 운동을 해요. 이 프로그램은 매일 아래 순서로 짰어요.</p>
+<div class="ord"><span>메인 복합 운동</span><i>→</i><span>보조 복합 운동</span><i>→</i><span>단관절 보조 운동</span><i>→</i><span>코어 · 안정화</span></div>
+<p class="note" style="margin:0">일반적인 원칙은 대근육 다관절 운동 → 소근육 다관절 운동 또는 대근육 단관절 운동(이 둘은 순서를 바꿔도 돼요) → 소근육 단관절 운동 → 몸통 안정화 운동이에요(ACSM 지침 기준). 운동 목적과 체력, 그날의 피로도에 따라 순서는 조정할 수 있어요.</p>
+</div>
+<div class="card">
+<h3>2. 프리웨이트와 머신</h3>
+<p style="margin:0">프리웨이트와 머신은 장점이 서로 달라요. <b>프리웨이트</b>(바벨·덤벨·맨몸)로는 기본 동작과 몸을 스스로 조절하는 능력을 익히고, <b>머신</b>으로는 안정적인 자세에서 목표 근육을 집중해서 강화해요. 그래서 메인 운동은 주로 프리웨이트로, 보조 운동은 둘을 섞어서 구성했어요.</p>
+</div>
+<div class="card" style="overflow-x:auto">
+<h3>3. 주차별 진행</h3>
+<table class="mains">
+<tr><th>주차</th><th>목적</th><th>진행 방법</th><th>세트를 마쳤을 때 남길 여유</th></tr>
+<tr><td><b>1주차 (A)</b></td><td>동작 익히기</td><td>가벼운 무게, 2~3세트</td><td>2~4회 더 할 수 있을 정도</td></tr>
+<tr><td><b>2주차 (B)</b></td><td>동작 안정화</td><td>세트 수는 그대로 두고, 반복수나 무게를 조금만 늘리기</td><td>2~3회</td></tr>
+<tr><td><b>3주차 (A)</b></td><td>점진적 과부하</td><td>회복이 충분할 때만 메인 운동에 1세트 추가 (표의 "3~4세트")</td><td>1~3회</td></tr>
+<tr><td><b>4주차 (B)</b></td><td>수행 능력 확인</td><td>2주차와 비교해서 자세·반복수·무게 중 좋아진 점 확인하기. 피로하면 세트를 줄여요</td><td>1~3회</td></tr>
+</table>
+<p class="note" style="margin-bottom:0">'남길 여유'는 세트를 끝낸 뒤 몇 번 더 할 수 있을지 스스로 예상한 횟수예요. 세트 수, 무게, 반복수를 한 번에 같이 늘리지 말고 하나씩 바꿔요.</p>
+</div>
+<div class="card">
+<h3>4. 무게를 올리는 기준</h3>
+<p style="margin:0">목표 반복수를 안정적인 자세로 해내고도 <b>1~2회 더 할 여유</b>가 있으면 다음 운동 때 무게를 조금 올려요. 올린 뒤 자세가 흔들리면 이전 무게로 돌아가요.</p>
+</div>
+<div class="card" style="overflow-x:auto">
+<h3>5. 부위별 메인 운동 단계</h3>
+<table class="mains">
+<tr><th>부위</th><th>단계</th><th>다음 단계로 넘어가는 기준</th></tr>
+<tr><td><b>가슴</b></td><td>인클라인 푸쉬업 → 푸쉬업 · 빈 바 벤치프레스 → 중량 벤치프레스</td><td>목표 반복수를 몸통이 처지지 않게 해낼 수 있을 때</td></tr>
+<tr><td><b>등</b></td><td>봉 힙힌지 → 루마니안 데드리프트 · 어시스트 풀업 (보조 무게를 점점 줄이기)</td><td>루마니안은 몸통을 안정적으로 유지하며 고관절을 접을 수 있을 때 무게 올리기. 풀업은 반동 없이 목표 반복수를 해내면 보조 무게 줄이기</td></tr>
+<tr><td><b>하체 A</b></td><td>맨몸 스쿼트 → 스플릿 스쿼트 → 빈 바 스쿼트 → 중량 스쿼트</td><td>발뒤꿈치가 들리지 않고 허리·골반을 조절하면서 원하는 깊이까지 앉을 수 있을 때</td></tr>
+<tr><td><b>하체 B</b></td><td>힙쓰러스트 · 봉 힙힌지 → 컨벤셔널 데드리프트</td><td>몸통을 안정적으로 유지하면서 바를 몸 가까이로 움직일 수 있을 때</td></tr>
+<tr><td><b>어깨</b></td><td>덤벨 숄더프레스 → 빈 바 오버헤드 프레스 → 중량 오버헤드 프레스</td><td>허리가 젖혀지지 않고, 좌우가 고르게 밀릴 때</td></tr>
+</table>
+<p class="note" style="margin-bottom:0">단계는 정해진 순서가 아니라 기준이에요. 이전 단계를 확실히 해낼 수 있을 때 넘어가요.</p>
+</div>
+</section>
+
+<section id="notice">
+<h2>⑤ 주의사항</h2>
+<div class="card">
+<b>컨디션이 떨어지거나 불편함이 생기면</b>
+<ul><li>무게를 낮추고 자세를 다시 점검해요.</li><li>그날 운동량은 세트를 줄여서 조절해도 괜찮아요.</li></ul>
+</div>
+<div class="card stop">
+<b>통증이 생기면</b>
+<ul><li>날카로운 통증, 관절이 불안정한 느낌, 평소와 다른 불편함이 있으면 그 운동을 바로 멈추고 트레이너에게 알려주세요.</li></ul>
+</div>
+<div class="card stop">
+<b>어지럽거나 메스꺼움·구토 증상이 있으면</b>
+<ul><li>바로 운동을 멈추고 앉거나 누워서 충분히 쉬어요.</li><li>증상이 가라앉기 전에는 다시 운동하지 않아요.</li><li>가슴 통증, 심한 호흡곤란, 쓰러질 것 같은 느낌이 있으면 운동을 멈추고 즉시 의료적 도움을 요청해요.</li></ul>
+</div>
+<div class="card">
+<b>혼자 바벨 운동을 할 때</b>
+<ul><li>벤치프레스와 스쿼트는 세이프티 바 설치법과 실패했을 때 대처하는 방법을 PT 수업에서 익힌 뒤에만 해요.</li><li>자신이 없으면 같은 날 머신이나 덤벨 운동으로 바꿔서 해요.</li></ul>
+</div>
+</section>
+
+</div>
+<footer>트레이너 강주희 · 궁금한 점은 PT 수업 때 편하게 물어보세요</footer>
+
+<script>
+// [역할, 운동명, 세트×반복, 휴식]  역할: P 준비 · M 메인 복합 · C 보조 복합 · S 단관절 보조 · K 코어·안정화
+const W={
+1:{goal:"동작 익히기 · 가벼운 무게로, 세트마다 2~4회 여유를 남겨요.",days:{
+"월":[["P","벽 폼롤러 전거근 활성화","2×10","30초"],["M","인클라인 푸쉬업","3×10","90초"],["C","인클라인 체스트프레스 머신","2×12","90초"],["C","머신 체스트프레스","2×12","90초"],["S","덤벨 플라이","2×12","60초"],["K","데드버그","2×8/쪽","45초"]],
+"화":[["P","힙힌지 (봉)","2×10","30초"],["M","루마니안 데드리프트","3×10","120초"],["C","랫풀다운","3×12","90초"],["C","롱풀 머신 (시티드 케이블 로우)","3×12","90초"],["S","덤벨 풀오버","2×12","60초"],["K","플랭크","2×20초","45초"]],
+"수":[["P","밴드 힙써클","2×10/방향","30초"],["M","스쿼트 (맨몸)","3×12","90초"],["C","레그프레스","2×12","90초"],["C","백 런지","2×8/쪽","60초"],["S","레그 익스텐션","2×12","60초"],["S","힙 어브덕션 머신","2×15","60초"]],
+"목":[["P","인클라인 Y레이즈 (맨손)","2×10","30초"],["M","덤벨 숄더프레스","3×10","90초"],["C","원암 덤벨 로우","2×10/쪽","60초"],["S","덤벨 사이드 레터럴 레이즈","2×12","60초"],["S","리어 델토이드 머신","2×12","60초"],["S","케이블 페이스풀","2×15","60초"]],
+"금":[["P","밴드 힙써클","2×10/방향","30초"],["M","힙쓰러스트","3×10","90초"],["C","사이드 런지","2×8/쪽","60초"],["S","레그컬","2×12","60초"],["S","밴드 사이드스텝","2×10걸음/쪽","45초"],["K","버드독","2×8/쪽","45초"]]}},
+2:{goal:"동작 안정화 · 세트 수는 그대로 두고, 반복수나 무게를 조금만 늘려요. 바벨 운동은 빈 바로 시작해요.",days:{
+"월":[["P","벽 폼롤러 전거근 활성화","2×10","30초"],["M","바벨 벤치프레스","3×10","120초"],["C","인클라인 덤벨프레스","2×10","90초"],["C","머신 체스트프레스","2×12","90초"],["S","덤벨 플라이","2×12~14","60초"],["K","데드버그","2×10/쪽","45초"]],
+"화":[["P","버드독","2×8/쪽","30초"],["M","어시스트 풀업 머신","3×8","120초"],["C","랫풀다운","2×12","90초"],["C","원암 덤벨 로우","2×10/쪽","60초"],["S","덤벨 풀오버","2×12","60초"],["K","플랭크","2×30초","45초"]],
+"수":[["P","밴드 힙써클","2×10/방향","30초"],["M","스플릿 스쿼트","3×10/쪽","90초"],["C","레그프레스","2×12~14","90초"],["S","레그 익스텐션","2×12~14","60초"],["S","힙 어브덕션 머신","2×15~20","60초"]],
+"목":[["P","인클라인 Y레이즈 (맨손)","2×10","30초"],["M","바벨 오버헤드 프레스","3×8","120초"],["C","롱풀 머신 (시티드 케이블 로우)","2×12","90초"],["S","덤벨 사이드 레터럴 레이즈","2×12~14","60초"],["S","리어 델토이드 머신","2×12~14","60초"],["S","케이블 페이스풀","2×15","60초"]],
+"금":[["P","힙힌지 (봉)","2×10","30초"],["M","컨벤셔널 데드리프트","3×8","150초"],["C","힙쓰러스트","3×10","90초"],["C","사이드 런지","2×8/쪽","60초"],["S","레그컬","2×12~14","60초"],["K","버드독","2×10/쪽","45초"]]}},
+3:{goal:"점진적 과부하 · 회복이 충분하면 메인 운동만 1세트 추가해요(3~4세트). 세트마다 1~3회 여유를 남겨요.",days:{
+"월":[["P","벽 폼롤러 전거근 활성화","2×10","30초"],["M","푸쉬업","3~4×8~10","90초"],["C","인클라인 덤벨프레스","3×10","90초"],["C","인클라인 체스트프레스 머신","2×12","90초"],["S","덤벨 플라이","2×12~14","60초"],["K","데드버그 + 덤벨 풀오버","2×8/쪽","45초"]],
+"화":[["P","힙힌지 (봉)","2×10","30초"],["M","루마니안 데드리프트","3~4×10","120초"],["C","랫풀다운","3×10","90초"],["C","롱풀 머신 (시티드 케이블 로우)","3×12","90초"],["S","스트레이트암 풀다운","2×12","60초"],["K","플랭크","3×30초","45초"]],
+"수":[["P","밴드 힙써클","2×10/방향","30초"],["M","바벨 백 스쿼트","3~4×8~10","150초"],["C","레그프레스","3×12","90초"],["C","백 런지","2×10/쪽","60초"],["S","레그 익스텐션","2×12~14","60초"],["S","힙 어브덕션 머신","2×15~20","60초"]],
+"목":[["P","인클라인 Y레이즈 (맨손)","2×10","30초"],["M","덤벨 숄더프레스","3~4×10","90초"],["C","원암 덤벨 로우","2×12/쪽","60초"],["S","덤벨 사이드 레터럴 레이즈","3×12","60초"],["S","리어 델토이드 머신","2×12~14","60초"],["S","케이블 페이스풀","2×15","60초"]],
+"금":[["P","밴드 힙써클","2×10/방향","30초"],["M","힙쓰러스트","3~4×10~12","90초"],["C","사이드 런지","2×8/쪽","60초"],["S","레그컬","2×12~14","60초"],["S","밴드 사이드스텝","2×12걸음/쪽","45초"],["K","케이블 리버스 우드촙","2×10/쪽","45초"]]}},
+4:{goal:"수행 능력 확인 · 2주차와 비교해 자세·반복수·무게 중 좋아진 점을 확인해요. 피로하면 세트를 줄여요.",days:{
+"월":[["P","벽 폼롤러 전거근 활성화","2×10","30초"],["M","바벨 벤치프레스","3~4×8~10","120초"],["C","인클라인 덤벨프레스","3×10~12","90초"],["C","인클라인 체스트프레스 머신","2×12","90초"],["S","덤벨 플라이","2×14","60초"],["K","데드버그 + 덤벨 풀오버","2×10/쪽","45초"]],
+"화":[["P","버드독","2×8/쪽","30초"],["M","어시스트 풀업 머신","3~4×8~10","120초"],["C","랫풀다운","3×12","90초"],["C","원암 덤벨 로우","2×12/쪽","60초"],["S","덤벨 풀오버","2×12","60초"],["K","플랭크","3×40초","45초"]],
+"수":[["P","밴드 힙써클","2×10/방향","30초"],["M","바벨 백 스쿼트","3~4×8~10","150초"],["C","레그프레스","3×12~14","90초"],["C","백 런지","2×10/쪽","60초"],["S","레그 익스텐션","2×14","60초"],["S","힙 어브덕션 머신","2×15~20","60초"]],
+"목":[["P","인클라인 Y레이즈 (맨손)","2×10","30초"],["M","바벨 오버헤드 프레스","3~4×8","120초"],["C","롱풀 머신 (시티드 케이블 로우)","2×12","90초"],["S","덤벨 사이드 레터럴 레이즈","3×12~14","60초"],["S","리어 델토이드 머신","2×12~14","60초"],["S","케이블 페이스풀","2×15","60초"]],
+"금":[["P","힙힌지 (봉)","2×10","30초"],["M","컨벤셔널 데드리프트","3~4×6~8","180초"],["C","힙쓰러스트","3×10~12","90초"],["C","사이드 런지","2×10/쪽","60초"],["S","레그컬","2×12~14","60초"],["K","케이블 리버스 우드촙","2×12/쪽","45초"]]}}
+};
+const ROLE={P:"준비운동",M:"메인 복합 운동",C:"보조 복합 운동",S:"단관절 · 안정화 보조 운동",K:"코어 · 안정화"};
+const DAYNAME={"월":"가슴 · 어깨 전면","화":"등 · 후면","수":"하체 A · 무릎 중심","목":"어깨 · 등 보완","금":"하체 B · 힙힌지 · 코어"};
+const G={
+"가슴":[
+["인클라인 푸쉬업","Incline Push-up","벤치나 스미스 바에 손을 짚고, 머리부터 발끝까지 일직선을 유지하며 가슴을 내렸다 밀기.","허리가 처지지 않게 배와 엉덩이에 힘주기. 손 짚는 곳이 높을수록 쉬워짐."],
+["푸쉬업","Push-up","내려갈 때는 날개뼈가 자연스럽게 가까워지고, 밀어 올라올 때는 날개뼈가 멀어지도록 움직이기. 몸통은 일직선 유지하기.","목표 반복수가 안 나오면 인클라인 푸쉬업으로 바꾸기."],
+["바벨 벤치프레스","Barbell Bench Press","등 윗부분을 벤치에 안정적으로 붙인 상태에서 바를 가슴 중간까지 내렸다가 가슴과 팔 힘으로 밀어 올리기.","세이프티 바를 꼭 설치하고, 빈 바부터 시작하기."],
+["덤벨 벤치프레스","Dumbbell Bench Press","벤치에 누워 덤벨을 가슴 옆까지 천천히 내렸다가 위로 밀기. 좌우가 같은 속도로 움직이게 만들기.","발은 바닥에 단단히 두고, 어깨가 편안한 범위까지만 내리기."],
+["인클라인 덤벨프레스","Incline Dumbbell Press","등받이를 30° 정도로 세우고, 덤벨을 윗가슴 쪽으로 내렸다 밀어 올리기.","등받이 각도가 너무 높으면 어깨 운동에 가까워지니 주의하기."],
+["머신 체스트프레스","Machine Chest Press","손잡이가 가슴 중간 높이에 오도록 좌석을 맞추고 앞으로 밀기.","팔꿈치 각도는 어깨가 가장 편안하게 느껴지는 경로로 정하기."],
+["인클라인 체스트프레스 머신","Incline Chest Press Machine","손잡이가 윗가슴 높이에 오도록 좌석을 맞추고, 위쪽 대각선 방향으로 밀기.","어깨가 앞으로 말리지 않게 등을 등받이에 붙이기."],
+["덤벨 플라이","Dumbbell Fly","벤치에 누워 팔꿈치를 살짝 굽힌 채 고정하고, 가슴이 늘어나는 느낌이 들 때까지 양옆으로 벌렸다가 껴안듯 모으기.","팔꿈치 각도를 바꾸지 않기. 어깨 앞쪽이 당기는 범위를 넘지 않게 가볍게 하기."]],
+"등":[
+["루마니안 데드리프트","Romanian Deadlift","선 자세에서 무릎을 살짝 굽힌 채 고관절을 접어, 바(또는 덤벨)를 허벅지를 따라 내렸다가 엉덩이를 밀며 올라오기. 햄스트링과 엉덩이 중심 운동.","몸통을 안정적으로 유지할 수 있는 범위까지만 내리기."],
+["랫풀다운","Lat Pulldown","가슴을 살짝 열고, 팔꿈치를 옆구리 쪽으로 내리듯 바를 윗가슴까지 당기기.","몸을 뒤로 크게 젖히거나 반동 쓰지 않기."],
+["어시스트 풀업 머신","Assisted Pull-up","무릎 패드에 올라 손잡이를 잡고, 팔꿈치를 옆구리로 내리듯 몸을 끌어올리기.","보조 무게가 클수록 쉬워짐. 반동 없이 목표 반복수를 해내면 보조 무게 줄이기."],
+["롱풀 머신 (시티드 케이블 로우)","Seated Cable Row","허리를 곧게 세운 채 손잡이를 배꼽 쪽으로 당기고 날개뼈 모으기.","상체를 앞뒤로 흔들어 당기지 않기."],
+["원암 덤벨 로우","One-arm Dumbbell Row","벤치에 한 손과 한 무릎을 짚고, 덤벨을 골반 쪽으로 당기기.","몸통이 돌아가지 않게 유지하기."],
+["덤벨 풀오버","Dumbbell Pullover","벤치에 누워 두 손으로 덤벨을 들고, 팔꿈치 각도를 일정하게 유지한 채 머리 뒤로 내렸다 올리기.","어깨가 불편하면 내리는 범위 줄이기. 허리가 과하게 뜨지 않게 하기."],
+["스트레이트암 풀다운","Straight-arm Pulldown","팔을 거의 편 채로 케이블 바를 허벅지 쪽으로 눌러 내리기.","상체는 살짝만 기울이고 반동 쓰지 않기."]],
+"하체":[
+["스쿼트 (맨몸)","Bodyweight Squat","발바닥 전체로 바닥을 지지하고, 고관절과 무릎을 함께 굽히며 앉기.","발뒤꿈치가 들리거나 허리·골반 조절이 무너지지 않는 깊이까지만 앉기."],
+["스플릿 스쿼트","Split Squat","다리를 앞뒤로 벌려 선 채, 발 위치는 고정하고 몸을 수직으로 내렸다 올라오기. 앞다리 발바닥 전체로 밀어 일어나기.","앞쪽 무릎이 발끝 방향을 따라가게 하기. 균형이 흔들리면 손으로 지지대 잡기."],
+["바벨 백 스쿼트","Barbell Back Squat","바를 등 윗부분에 얹고, 발바닥 전체로 바닥을 지지하며 고관절과 무릎을 함께 굽혀 앉기.","세이프티 바를 꼭 설치하고 빈 바부터 시작하기. 깊이는 허리·골반 조절이 유지되는 범위로 정하기."],
+["레그프레스","Leg Press","발을 어깨너비로 두고, 무릎이 발끝 방향을 따라가도록 내렸다 밀기.","반동 없이 움직이고, 다 밀었을 때 무릎이 뒤로 꺾이지 않게 조절하기."],
+["백 런지","Reverse Lunge","한 발을 뒤로 내딛고, 앞다리 발바닥으로 체중을 지지하며 내려가기. 앞다리 힘으로 일어나기.","앞쪽 무릎이 발끝 방향을 따라가게 하기. 무릎 각도는 보폭에 따라 달라져도 괜찮음."],
+["레그 익스텐션","Leg Extension","무릎과 기구의 회전축을 맞춘 뒤, 허벅지 앞쪽 근육으로 무릎 펴기.","통증이 없는 범위에서 반동 없이 움직이고 천천히 내려오기."],
+["힙 어브덕션 머신","Hip Abduction Machine","골반을 의자에 고정한 채 엉덩이 옆 근육으로 다리 벌리기.","몸통 각도는 엉덩이 옆에 힘이 가장 잘 느껴지는 자세로 정하기."],
+["컨벤셔널 데드리프트","Conventional Deadlift","바를 발 중앙 가까이에 두고, 복부에 힘을 줘 몸통을 안정시킨 채 바를 몸 가까이로 올리며 고관절과 무릎 펴기.","자세를 유지하기 어려워지면 무게 줄이기."],
+["힙쓰러스트","Hip Thrust","등 윗부분을 벤치에 대고 턱을 당긴 채, 엉덩이를 밀어 올려 1초 조이기.","허리를 젖혀서 올리지 말고 엉덩이 힘으로 올리기."],
+["글루트 브릿지","Glute Bridge","누워서 무릎을 세우고 엉덩이를 조이며 골반 들어 올리기.","허리가 아니라 엉덩이로 들기."],
+["사이드 런지","Lateral Lunge","옆으로 내딛고, 엉덩이를 뒤로 보내며 한쪽 다리로 앉았다 돌아오기.","내딛은 다리의 무릎과 발끝 방향을 같게 하기."],
+["레그컬","Leg Curl","패드를 발목 위에 맞추고 뒤꿈치를 엉덩이 쪽으로 당기기.","엉덩이가 들리지 않게 하고 천천히 내려오기."],
+["밴드 사이드스텝","Banded Lateral Walk","무릎 위에 밴드를 걸고 살짝 앉은 자세로 옆으로 걷기.","발이 끌리지 않게 하고 상체 세우기."]],
+"어깨":[
+["덤벨 숄더프레스","Dumbbell Shoulder Press","앉아서 덤벨을 어깨 옆에서 머리 위로 밀어 올리기.","내리는 높이와 가동범위는 통증 없이 조절되는 범위로 정하기. 허리가 젖혀지지 않게 하기."],
+["바벨 오버헤드 프레스","Barbell Overhead Press","선 자세에서 바를 쇄골 위에 두고, 엉덩이와 배에 힘을 준 채 머리 위로 밀어 올리기.","빈 바부터 시작하고, 허리가 젖혀지면 무게 내리기."],
+["덤벨 사이드 레터럴 레이즈","Dumbbell Lateral Raise","팔꿈치를 살짝 굽히고 어깨 높이 정도까지 옆으로 들어 올리기.","반동 없이 천천히 움직이기."],
+["리어 델토이드 머신","Rear Delt Fly Machine","가슴을 패드에 대고 팔을 옆으로 벌려 어깨 뒤쪽 사용하기.","팔을 넓게 보내는 데 집중하기."],
+["케이블 페이스풀","Cable Face Pull","로프를 얼굴 높이로 당기면서 팔꿈치를 바깥으로 벌리고, 마지막에 손을 뒤로 돌리기. 어깨 뒤쪽과 날개뼈를 안정시키는 운동.","허리를 젖혀서 당기지 않기."]],
+"코어":[
+["데드버그","Dead Bug","누워서 무릎과 팔을 90°로 든 뒤, 복부 긴장을 유지하며 반대쪽 팔과 다리를 천천히 뻗기.","허리가 과하게 뜨거나 몸통이 흔들리면 뻗는 범위 줄이기."],
+["데드버그 + 덤벨 풀오버","Dead Bug with Dumbbell Pullover","데드버그 자세에서 두 손으로 덤벨을 들고, 다리를 뻗을 때 덤벨을 머리 뒤로 넘기기.","몸통이 흔들리지 않는 범위에서만 움직이기."],
+["플랭크","Plank","팔꿈치를 어깨 아래에 두고, 머리부터 발뒤꿈치까지 일직선 유지하기.","엉덩이가 처지거나 너무 올라가지 않게 하기."],
+["버드독","Bird Dog","네발 자세에서 반대쪽 팔과 다리를 천천히 뻗고 2초 멈추기.","골반이 옆으로 돌아가지 않게 하기."],
+["케이블 리버스 우드촙","Cable Reverse Wood Chop","낮은 케이블을 대각선 위로 들어 올리며, 골반과 몸통을 함께 회전하기.","허리만 비틀지 말고 고관절과 등 윗부분의 회전을 함께 쓰기."]],
+"준비 · 가동성":[
+["벽 폼롤러 전거근 활성화","Wall Foam Roller Serratus Activation","팔뚝으로 폼롤러를 벽에 부드럽게 밀면서 위로 굴리기. 날개뼈가 자연스럽게 위쪽으로 회전하게 하기.","목에 과한 긴장이 생기거나 허리가 젖혀지지 않게 하기."],
+["힙힌지 (봉)","Hip Hinge","등 뒤에 봉을 대고(머리·등·엉덩이 접촉), 척추 정렬을 유지하며 고관절을 중심으로 접기.","봉이 몸에서 떨어지면 범위 줄이기."],
+["밴드 힙써클","Banded Hip Circle","무릎 위에 밴드를 걸고, 한쪽 다리로 원을 그리며 고관절 풀기.","몸통은 고정하기."],
+["인클라인 Y레이즈","Incline Y-Raise","인클라인 벤치에 엎드려 엄지를 위로 한 채 팔을 Y자로 들어 올리기.","목에 힘주지 않고 가볍게 하기."]]
+};
+const days=["월","화","수","목","금"];
+const AB=w=>w%2?"A":"B";
+const base=n=>n.replace(/ \((맨손|가벼운 덤벨)\)$/,"");
+let s="<tr><th>요일</th>"+[1,2,3,4].map(w=>`<th>${w}주차<span class="badge ${AB(w)}">${AB(w)}</span></th>`).join("")+"</tr>";
+days.forEach(d=>{s+=`<tr><td class="day">${d}요일<small>${DAYNAME[d]}</small></td>`+[1,2,3,4].map(w=>`<td class="${AB(w)}">${W[w].days[d].find(x=>x[0]==="M")[1]}</td>`).join("")+"</tr>";});
+document.getElementById("schedTable").innerHTML=s;
+const tabs=document.getElementById("weekTabs"),panels=document.getElementById("weekPanels");
+[1,2,3,4].forEach(w=>{
+ const b=document.createElement("button");b.textContent=`${w}주차 (${AB(w)})`;b.onclick=()=>show(w);tabs.appendChild(b);
+ let h=`<div class="weekpanel" id="wp${w}"><div class="weekgoal"><b>${w}주차</b> · ${W[w].goal}</div>`;
+ days.forEach(d=>{
+  let n=0,last="",t=`<div class="card"><h3>${d}요일 · ${DAYNAME[d]}</h3><table class="prog"><tr><th>순서</th><th>운동명</th><th>세트 × 반복</th><th>휴식</th></tr>`;
+  W[w].days[d].forEach(x=>{
+   if(x[0]!==last){t+=`<tr class="grp"><td colspan="4">${ROLE[x[0]]}</td></tr>`;last=x[0];}
+   t+=`<tr class="${x[0]==="M"?"main":""}"><td>${x[0]==="P"?"-":++n}</td><td>${x[1]}</td><td>${x[2]}</td><td>${x[3]}</td></tr>`;
+  });
+  h+=t+"</table></div>";
+ });
+ panels.innerHTML+=h+"</div>";
+});
+function show(w){[1,2,3,4].forEach(i=>{document.getElementById("wp"+i).style.display=i===w?"block":"none";tabs.children[i-1].classList.toggle("on",i===w);});}
+show(1);
+const used=new Set();[1,2,3,4].forEach(w=>days.forEach(d=>W[w].days[d].forEach(x=>used.add(base(x[1])))));
+let g="";
+Object.entries(G).forEach(([p,list])=>{const c=list.filter(x=>used.has(x[0]));if(!c.length)return;
+ g+=`<h3 class="parthead">${p}</h3><div class="guide">`+c.map(c=>`<div class="card"><b>${c[0]} <span class="en">${c[1]}</span></b>${c[2]}<div class="warn">⚠ ${c[3]}</div></div>`).join("")+"</div>";});
+document.getElementById("guideWrap").innerHTML=g;
+</script>
+</body>
+</html>
